@@ -60,7 +60,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             }).then(() => {
 
                 // 🚀 redireciona pro dashboard
-                window.location.href = 'dashboard.html';
+                window.location.href = 'html/dashboard.html';
 
             });
 
