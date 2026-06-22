@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3407/3407024.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel | Sistema TCC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-layout">
+        <nav class="sidebar">
+            <h2>SISTEMA TCC</h2>
+            <a href="/html/dashboard.html" style="background-color: var(--accent);"><i class="fas fa-chart-line"></i> Início</a>
+            <a href="/html/alunos.html"><i class="fas fa-user-graduate"></i> Alunos</a>
+            <a href="/html/empresas.html"><i class="fas fa-building"></i> Empresas</a>
+            <a href="/html/tcc.html"><i class="fas fa-file-alt"></i> Projetos TCC</a>
+            
+            <a href="index.html" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            Sair
+        </a>
+        </nav>
+
+        <main class="content">
+            <div class="header-content">
+                <h1>Painel de Controle</h1>
+                <p>Resumo geral do sistema acadêmico</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="card-stat">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Alunos</h3>
+                    <p>128</p>
+                </div>
+                
+                <div class="card-stat" style="border-bottom-color: #27ae60;">
+                    <i class="fas fa-file-alt" style="color: #27ae60;"></i>
+                    <h3>TCCs Ativos</h3>
+                    <p>42</p>
+                </div>
+
+                <div class="card-stat" style="border-bottom-color: #f39c12;">
+                    <i class="fas fa-building" style="color: #f39c12;"></i>
+                    <h3>Empresas</h3>
+                    <p>15</p>
+                </div>
+
+                <div class="card-stat" style="border-bottom-color: #8e44ad;">
+                    <i class="fas fa-book" style="color: #8e44ad;"></i>
+                    <h3>Cursos</h3>
+                    <p>04</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--primary);"><i class="fas fa-history"></i> Atividades Recentes</h3>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                <p style="color: #888; font-size: 0.9rem;">Nenhuma atividade nova registrada hoje.</p>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>TCCs | Sistema TCC</title>
+
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3407/3407024.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="main-layout">
+
+    <nav class="sidebar">
+
+        <h2>SISTEMA TCC</h2>
+
+        <a href="/html/dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            Dashboard
+        </a>
+
+        <a href="/html/alunos.html">
+            <i class="fas fa-user-graduate"></i>
+            Alunos
+        </a>
+
+        <a href="/html/empresas.html">
+            <i class="fas fa-building"></i>
+            Empresas
+        </a>
+
+        <a href="/html/tcc.html">
+            <i class="fas fa-file-pdf"></i>
+            TCCs
+        </a>
+
+        <a href="index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            Sair
+        </a>
+
+    </nav>
+
+    <main class="content">
+
+        <div class="header-content">
+
+            <h1>Gerenciamento de TCC</h1>
+
+            <p>
+                Cadastro e gerenciamento dos trabalhos.
+            </p>
+
+        </div>
+
+        <div class="card-form">
+
+            <h3>Novo TCC</h3>
+
+            <form id="formTcc">
+
+                <div class="form-grid">
+
+                    <div class="form-group form-full">
+                        <label>Título</label>
+
+                        <input
+                        type="text"
+                        id="titulo"
+                        required>
+                    </div>
+
+                    <div class="form-group form-full">
+                        <label>Resumo</label>
+
+                        <textarea
+                        id="resumo"
+                        required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Aluno</label>
+
+                        <select
+                        id="aluno"
+                        required>
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Arquivo PDF</label>
+
+                        <input
+                        type="file"
+                        id="arquivo"
+                        accept=".pdf"
+                        required>
+                    </div>
+
+                </div>
+
+                <button
+                type="submit"
+                class="btn-primary">
+
+                    Cadastrar TCC
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="table-container">
+
+            <h3>TCCs Cadastrados</h3>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Título</th>
+                        <th>Aluno</th>
+                        <th>Curso</th>
+                        <th>Empresa</th>
+                        <th>Status</th>
+                        <th>PDF</th>
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelaTccs"></tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/tcc.js"></script>
+
+</body>
+</html>

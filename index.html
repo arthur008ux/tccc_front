@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3407/3407024.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | Sistema TCC</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    
+<body class="login-page">
+    <div class="login-card">
+        <div class="side-info">
+            <h1>Portal Acadêmico</h1>
+            <p>Controle de TCC Integrado</p>
+            <div class="course-grid">
+                <div class="course-box"><i class="fas fa-code"></i>INFO</div>
+                <div class="course-box"><i class="fas fa-chart-line"></i>ADM</div>
+                <div class="course-box"><i class="fas fa-seedling"></i>AGRO</div>
+                <div class="course-box"><i class="fas fa-solar-panel"></i>ENERGIA</div>
+            </div>
+        </div>
+        <div class="side-form">
+            <h2>Bem-vindo</h2>
+           
+            <form id="loginForm">
+    <div class="input-group">
+        <label>Usuário</label>
+        <input
+            type="text"
+            id="usuario"
+            placeholder="Digite seu usuário"
+            required
+        >
+    </div>
+
+    <div class="input-group">
+        <label>Senha</label>
+        <input
+            type="password"
+            id="senha"
+            placeholder="••••••"
+            required
+        >
+    </div>
+
+    <button type="submit">ENTRAR NO SISTEMA</button>
+</form>
+
+        </div>
+    </div>
+    <script src="./js/config.js"></script>
+    <script src="./js/login.js"></script>
+
 </body>
 </html>

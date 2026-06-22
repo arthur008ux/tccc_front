@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3407/3407024.png">
+    <meta charset="UTF-8">
+    <title>Cursos | Sistema TCC</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-layout">
+        <nav class="sidebar">
+            <h2>SISTEMA TCC</h2>
+            <a href="/html/dashboard.html"><i class="fas fa-chart-line"></i> Início</a>
+            <a href="/html/alunos.html"><i class="fas fa-user-graduate"></i> Alunos</a>
+            <a href="/html/cursos.html" style="background-color: var(--accent);"><i class="fas fa-book"></i> Cursos</a>
+            <a href="/html/empresas.html"><i class="fas fa-building"></i> Empresas</a>
+            <a href="/html/tcc.html"><i class="fas fa-file-alt"></i> Projetos TCC</a>
+            <a href="/html/index.html" id="linkSair" style="margin-top: auto; color: #ff8888;"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </nav>
+
+        <main class="content">
+            <div class="header-content">
+                <h1>Gerenciar Cursos</h1>
+                <p>Configure os cursos oferecidos pela instituição</p>
+            </div>
+
+            <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 15px;">Novo Curso</h3>
+                <form id="formCurso" style="display: flex; gap: 15px; align-items: flex-end;">
+                    <div style="flex: 2;">
+                        <label style="display:block; font-size: 0.8rem; color: #666;">Nome do Curso</label>
+                        <input type="text" id="nomeCurso" placeholder="Ex: Informática para Internet" style="margin-bottom: 0;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="display:block; font-size: 0.8rem; color: #666;">Carga Horária (h)</label>
+                        <input type="number" id="cargaHoraria" placeholder="Ex: 1200" style="margin-bottom: 0;">
+                    </div>
+                    <button type="button" id="btnAdicionarCurso" style="flex: 0.5; margin-top: 0;">Salvar</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <h3>Cursos Ativos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome do Curso</th>
+                            <th>Carga Horária</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaCursos">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btnAdd = document.getElementById('btnAdicionarCurso');
+        const tabela = document.getElementById('corpoTabelaCursos');
+
+        // Carregar do LocalStorage ao abrir
+        window.onload = () => {
+            const cursosSalvos = JSON.parse(localStorage.getItem('listaCursos')) || [];
+            cursosSalvos.forEach(curso => adicionarLinhaNaTabela(curso));
+        };
+
+        // Adicionar Curso
+        btnAdd.addEventListener('click', function() {
+            const nome = document.getElementById('nomeCurso').value;
+            const carga = document.getElementById('cargaHoraria').value;
+
+            if (nome === '' || carga === '') {
+                return Swal.fire('Atenção', 'Preencha todos os campos do curso!', 'warning');
+            }
+
+            const novoCurso = {
+                id: "CRS-" + Math.floor(Math.random() * 1000),
+                nome: nome,
+                carga: carga
+            };
+
+            const cursos = JSON.parse(localStorage.getItem('listaCursos')) || [];
+            cursos.push(novoCurso);
+            localStorage.setItem('listaCursos', JSON.stringify(cursos));
+
+            adicionarLinhaNaTabela(novoCurso);
+            
+            document.getElementById('nomeCurso').value = '';
+            document.getElementById('cargaHoraria').value = '';
+
+            Swal.fire({ icon: 'success', title: 'Curso Salvo!', showConfirmButton: false, timer: 1500 });
+        });
+
+        function adicionarLinhaNaTabela(curso) {
+            const novaLinha = document.createElement('tr');
+            novaLinha.setAttribute('data-id', curso.id);
+            novaLinha.innerHTML = `
+                <td>#${curso.id}</td>
+                <td class="nome-celula">${curso.nome}</td>
+                <td class="carga-celula">${curso.carga}h</td>
+                <td>
+                    <button class="btn-action btn-edit" onclick="editarCurso('${curso.id}')">Editar</button>
+                    <button class="btn-action btn-delete" onclick="excluirCurso('${curso.id}', this)">Remover</button>
+                </td>
+            `;
+            tabela.appendChild(novaLinha);
+        }
+
+        // Editar Curso com SweetAlert
+        async function editarCurso(id) {
+            let cursos = JSON.parse(localStorage.getItem('listaCursos'));
+            const curso = cursos.find(c => c.id === id);
+
+            const { value: formValues } = await Swal.fire({
+                title: 'Editar Curso',
+                html:
+                    `<label style="display:block;text-align:left;font-size:12px;color:#666">Nome do Curso</label>` +
+                    `<input id="swal-nome" class="swal2-input" value="${curso.nome}">` +
+                    `<label style="display:block;text-align:left;font-size:12px;color:#666">Carga Horária (h)</label>` +
+                    `<input id="swal-carga" type="number" class="swal2-input" value="${curso.carga}">`,
+                focusConfirm: false,
+                confirmButtonColor: '#1e3a8a',
+                preConfirm: () => {
+                    return [
+                        document.getElementById('swal-nome').value,
+                        document.getElementById('swal-carga').value
+                    ]
+                }
+            });
+
+            if (formValues && formValues[0] !== '') {
+                curso.nome = formValues[0];
+                curso.carga = formValues[1];
+                localStorage.setItem('listaCursos', JSON.stringify(cursos));
+
+                const linha = document.querySelector(`tr[data-id="${id}"]`);
+                linha.querySelector('.nome-celula').innerText = curso.nome;
+                linha.querySelector('.carga-celula').innerText = curso.carga + 'h';
+
+                Swal.fire('Atualizado!', 'O curso foi atualizado.', 'success');
+            }
+        }
+
+        // Excluir Curso com SweetAlert
+        function excluirCurso(id, botao) {
+            Swal.fire({
+                title: 'Remover Curso?',
+                text: "Isso não poderá ser desfeito!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1e3a8a',
+                cancelButtonColor: '#ef4444',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let cursos = JSON.parse(localStorage.getItem('listaCursos'));
+                    cursos = cursos.filter(c => c.id !== id);
+                    localStorage.setItem('listaCursos', JSON.stringify(cursos));
+                    botao.closest('tr').remove();
+                    Swal.fire('Deletado!', 'O curso foi removido.', 'success');
+                }
+            });
+        }
+
+        // Confirmação de Saída
+        document.getElementById('linkSair').onclick = (e) => {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Deseja sair?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#1e3a8a',
+                confirmButtonText: 'Sair',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) window.location.href = 'index.html';
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portal do Aluno</title>
+
+    <!-- favicon único (limpo) -->
+    <link rel="icon" type="image/png" href="./download.svg">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- melhor prática -->
+    <script defer src="js/portal-aluno.js"></script>
+
+</head>
+
+<body class="login-page">
+
+    <div class="login-card">
+
+        <div class="side-info">
+
+            <h1>Portal Acadêmico</h1>
+
+            <p>Pesquisa de TCC por Matrícula</p>
+
+        </div>
+
+        <div class="side-form">
+
+            <h2>Consultar TCC</h2>
+
+            <form id="formPesquisa">
+
+                <div class="input-group">
+
+                    <label for="pesquisa">Nome ou Matrícula</label>
+
+                    <input 
+                        type="text"
+                        id="pesquisa"
+                        placeholder="Digite o nome ou matrícula"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit">
+                    PESQUISAR
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
